@@ -3,12 +3,14 @@ import { Book } from './schemas/book.schema';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
+import { ApiBody } from '@nestjs/swagger';
 
 @Controller('books')
 export class BookController {
   constructor(private readonly bookService: BookService) { }
 
   @Post()
+  @ApiBody({ type: CreateBookDto, isArray: true })
   async create(@Body() createBookDto: CreateBookDto | CreateBookDto[]): Promise<Book | Book[]> {
     try {
       if (Array.isArray(createBookDto)) {
@@ -61,6 +63,7 @@ export class BookController {
   }
 
   @Patch(':id')
+  @ApiBody({ type: UpdateBookDto })
   async update(@Param('id') id: string, @Body() updateBookDto: UpdateBookDto) {
     return this.bookService.update(+id, updateBookDto);
   }
