@@ -10,7 +10,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    MongooseModule.forRoot(`${new ConfigService().get('MONGO_DB')}`),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get<string>('MONGO_DB'),
+      }),
+      inject: [ConfigService],
+    }),
     BookModule
   ],
   controllers: [AppController],
