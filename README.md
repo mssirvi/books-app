@@ -39,4 +39,3 @@ $ npm run test:cov
 ```
 ## High level design
 <a href="HLD.png">HLD</a>
-!Diagram HLD.png
