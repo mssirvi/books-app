@@ -38,4 +38,5 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 ## High level design
-<a href="HLD.webp">HLD</a>
+<a href="HLD.png">HLD</a>
+!Diagram HLD.png
