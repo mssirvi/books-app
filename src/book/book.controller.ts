@@ -4,10 +4,14 @@ import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { ApiBody } from '@nestjs/swagger';
+import { LoggerService } from 'src/logger/logger.service';
 
 @Controller('books')
 export class BookController {
-  constructor(private readonly bookService: BookService) { }
+  constructor(
+    private readonly bookService: BookService,
+    private logger: LoggerService
+  ) { }
 
   @Post()
   @ApiBody({ type: CreateBookDto, isArray: true })
@@ -25,16 +29,17 @@ export class BookController {
           const bookDtoPromises = createBookDto.map(bookdto => {
             return this.bookService.create(bookdto);
           });
-          
+
           return await Promise.all(bookDtoPromises);
         }
       }
 
       return await this.bookService.create(createBookDto);
     } catch (error) {
+      this.logger.log({ error });
       throw new HttpException({
         status: HttpStatus.BAD_REQUEST,
-        error: error.message
+        error: error
       }, HttpStatus.BAD_REQUEST, {
         cause: error
       })
@@ -52,6 +57,7 @@ export class BookController {
     try {
       return await this.bookService.findOne(id);
     } catch (error) {
+      this.logger.log(error);
       throw new HttpException({
         status: HttpStatus.BAD_REQUEST,
         error: error.message

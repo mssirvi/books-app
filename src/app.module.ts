@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { CommunicationModule } from './communication/communication.module';
+import { LoggerModule } from './logger/logger.module';
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { CommunicationModule } from './communication/communication.module';
     EventEmitterModule.forRoot({
       wildcard: true
     }),
-    CommunicationModule
+    CommunicationModule,
+    LoggerModule
   ],
 })
 export class AppModule { }
