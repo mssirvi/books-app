@@ -21,10 +21,6 @@ export class BookService {
     const bookResponse = createdBook.save();
     if (bookResponse) {
       this.Emitter.emit('Book.created', createBookDto);
-      this.logger.log({
-        event: 'Book.created',
-        createBookDto
-      });
     }
     return bookResponse;
   }
@@ -36,9 +32,6 @@ export class BookService {
   async findOne(id: string): Promise<Book> {
     const book = await this.BookModel.findById(id).exec();
     if (!book) {
-      this.logger.log({
-        message: ` Book with ID: ${id} not found`
-      });
       throw new NotFoundException(` Book with ID: ${id} not found`);
     }
     return book;
