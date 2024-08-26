@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { BookModule } from './book/book.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+import { CommunicationModule } from './communication/communication.module';
 
 @Module({
   imports: [
@@ -15,7 +17,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       }),
       inject: [ConfigService],
     }),
-    BookModule
+    BookModule,
+    EventEmitterModule.forRoot({
+      wildcard: true
+    }),
+    CommunicationModule
   ],
 })
 export class AppModule { }
