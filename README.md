@@ -26,6 +26,7 @@ $ npm run start:prod
 ```
 ## tracing
 
+```bash
 # start jaeger container
 $ docker run --rm \
   -e COLLECTOR_ZIPKIN_HOST_PORT=:9411 \
@@ -34,9 +35,9 @@ $ docker run --rm \
   -p 4318:4318 \
   -p 9411:9411 \
   jaegertracing/all-in-one:latest
-
-jaeger-ui : http://localhost:16686/ 
 ```
+jaeger-ui : http://localhost:16686/ 
+
 ## Run tests
 
 ```bash
