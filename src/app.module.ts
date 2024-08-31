@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { CommunicationModule } from './communication/communication.module';
 import { LoggerModule } from './logger/logger.module';
+import { OpenaiModule } from './openai/openai.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { LoggerModule } from './logger/logger.module';
       wildcard: true
     }),
     CommunicationModule,
-    LoggerModule
+    LoggerModule,
+    OpenaiModule
   ],
 })
 export class AppModule { }
