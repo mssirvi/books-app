@@ -36,6 +36,7 @@
     "aws-sdk": "^2.1682.0",
     "class-validator": "^0.14.1",
     "mongoose": "^8.5.4",
+    "openai": "^4.57.0",
     "reflect-metadata": "^0.2.1",
     "rxjs": "^7.8.1"
   },
